@@ -1,0 +1,290 @@
+DBMS Project Description
+
+Team Name:  Seg_Fault
+
+Team Members: Shubhi Sharma (2017195)
+		   Himanshu Bansal (2017236)
+		   Aayush Baghel (2017214)
+		   Aditya Gupta (2017325)
+	 	   Priyank Singh (2017177)
+
+Project Application/Domain: Online Movie Ticket Booking 
+
+Project Title: Ticketer
+
+Project Description: We are developing an application that would organize the collection of data.
+The primary functions of Online Movie Ticket Booking are distributed among different stakeholders such as Users can book movie tickets online, check availability of seats, make payment through the online portal, and much more.  Movie producers can set the base price for their movie, can set release date, can organize premieres. Theatre Owners can keep a check on the number of tickets sold in a day, can add their branches,  and set ticket prices. Admin department handles all the queries such as keeping a check on ticket cancellations, managing feature updates, and additions.
+
+Marks expected in project : 100/100
+
+Stakeholders:(Role of each stakeholder in a line or two) (5 tasks for each stakeholder)
+User
+ROLE - The user will register himself/herself to book tickets for the movie/s.
+Movie booking
+Availability check
+Payment
+Cancel
+Upcoming movies
+Check the rating and Give rating
+Can file complaint 
+Give app feedback
+
+	Queries :
+Search for a movie from a specific director
+Make online payment for the booking of any number of tickets.
+Check which cinemas are screening the movie named ‘ABC’.
+Find a theatre that has show timings between 2 pm to 7 pm.
+Check the review of a movie whose name starts with ‘QPR‘.
+Can see whether ‘ABC’ is in cinemas on 25th January
+	
+Movie Producers
+ROLE - They will provide the admin all the information regarding the movie. 
+Number of tickets sold
+Show Timings
+Show Locations
+Number of Shows
+Ratings Check
+Set base price 
+Set Release Date
+	Queries :
+Set the release date of the movie to be dd/mm/yyyy .
+Find a theatre where a movie with the name ‘XYZ’ is screening on date dd/mm/yyyy.
+Check the total number of tickets sold between 11 am to 11 pm today.
+Change the release date of the movie with the name ‘XYZ’  from dd/mm/yyyy to DD/MM/YYYY.
+Find show timings of all the movies screening on theatres whose rating is >= 3.
+
+Theatre Owners
+ROLE - They will provide the admin all the information about various movies in the cinemas and their timings.
+Movie show timings
+Check tickets sold
+Payment
+Check booking status of individual
+Show cancellation + addition of shows
+Ticket price 
+	Queries :
+Set show timings for date equal to ‘dd/mm/yyyy’.
+Add more seats on row = ‘5’ where theatre name is equal to ‘QRP’.
+Get the list of movies screening today.
+Cancel all the movie screenings between 8 pm to 11 pm today.
+Increase the ticket price by amount = 10 for all the movies screening on date = dd/mm/yyyy.
+
+Application Admin
+ROLE - Admin control and manages the whole database and adds tuples and attributes to the tables with the information provided by other stakeholders. Also, admin grants editing rights to other stakeholders.
+Check app feedback
+Add a new theatre 
+Add new shows
+Manage cancellations
+Manage movies lists
+Feature updation and deletion
+	Queries :
+Update the list of upcoming movies in the ascending order of their rating.
+Check the booking status of a person whose order id = ‘1235’.
+Add a new theatre with name = ‘ABC’ on location = ‘Street 1‘.
+Manage ticket cancellation request with request id = ‘5678’.
+Add more show timings for a movie with name = ‘wert’.
+
+Critics 
+ROLE -  The critics will register themselves and provide constructive reviews about the latest movies and give rating accordingly and can also book tickets for the same.
+Review movies
+Give ratings 
+Check his/her old review ratings
+Edit old reviews 
+Delete old reviews 
+
+	Queries :
+Give rating = 3 to the movie where movie type = ‘Fantasy’ and name = ‘XYZ’.
+Delete a past review dated on date = dd/mm/yyyy.
+Book a ticket for the upcoming premiere.
+Edit a review of movie name = ‘xyz’ and increase the rating by 1.
+Check the list of users who upvote his/her review for movie type = ‘sci-fic’.
+
+
+Tentative tables which can be formed: (along with possible attributes in mind)(define constraints)
+
+UserTable
+U_id: int (Primary key)
+U_name: varchar(20)
+U_age: int
+U_contact: varchar(10)
+U_email: varchar(30)
+U_address:varchar(50)
+Movies
+M_id: int (Primary key)
+M_name: varchar(30)
+M_genre: varchar(15)
+M_language: varchar(15)
+M_duration: varchar(30)
+M_releasedate: date
+M_collection: numeric(10,2)
+Cinemas
+C_id: int (Primary key)
+C_name: varchar(20)
+C_location: varchar(50)
+C_seats: int
+MovieCinemaRelation
+MCR_id : int(Primary key)
+M_id : int (foreign key references movies)
+C_id : int (foreign key references cinemas)
+MCR_MovieExpiryDate : date
+MCR_time : time
+Payments
+P_id : int (Primary key)
+U_id : int (foreign key references UserTable)
+P_amount : int 
+P_status : varchar(10)
+P_bank : varchar (30)
+PR_id : int (foreign key references price)
+Feedback of movies
+F_id : int (Primary key)
+F_feedback : varchar(500)
+U_id : int (foreign key references UserTable)
+M_id : int (foreign key references movies)
+Movie rating
+R_id : int (Primary key)
+R_rating : int
+U_id : int (foreign key references UserTable)
+M_id : int (foreign key references movies)
+Feedback of Application
+Feed_id : int (Primary key)
+Feed_feedback : varchar(500)
+U_id : int (foreign key references UserTable)
+Seats
+S_id : int (Primary key)
+C_id : int (foreign key references cinemas)
+S_SeatStatus : varchar(100)
+Bookings
+B_id : int (Primary key)
+MCR_id (foreign key reference MovieCinemaRelation)
+S_number : int 
+Price
+PR_id : int (Primary key)
+PR_Amount : int 
+C_id : int (foreign key references cinemas)
+Critic
+CRI_id : int (Primary key)
+CRI_name: varchar(20)
+CRI_contact: varchar(10)
+CRI_email: varchar(30)
+Feedback and Rating by Critic 
+FRC_id : int (Primary Key)
+FRC_feedback : varchar (500)
+FRC_rating : int
+M_id : int (foreign key references movies)
+CRI_id : int (foreign key references critic)
+
+Features of Website:
+User Point of view:
+ Can create an id with desired username and password. (Person cannot take an already taken user id)
+Can view different movies screening.
+Can search movies according to name or director name.
+Can write reviews for a particular movie.
+Can book a movie ticket by selecting any particular show.
+Can select any show from any cinema
+Can select any number of seats required
+The final amount would be shown according to the ticket price of the theatre. The final amount is automatically added to the accounts of movie producer (half) and cinema owners (half).
+The payments can be done from any bank account
+Final ticket is produced.
+Can cancel a ticket if not booked by mistake. The seats are automatically updated in the movie hall.
+Movie Producer Point of view:
+Can perform all the tasks of a user.
+Can see his earnings from a particular movie.
+Theater Owner Point of view:
+Can perform all the tasks of a user.
+Can see his earnings from a particular movie.
+Critic Point of View:
+Can perform all tasks of a user
+Gives critic reviews.
+Admin:
+Can add the movies 
+Can add theatres
+Can add various shows of different movies in different cinemas and at different date and time.
+Can delete any of the above.
+
+
+MongoDB Queries:
+
+Ticketer.movies.insert [
+{name: “P.S. Love You”,
+Release_date:30-04-2020,
+Director: "Richard LaGravenese"
+Genre: romance } ]
+Ticketer.users.findById[
+{_id : 12234} ]
+Ticketer.theatres.deleteOne[
+{ _id: 234 , name : “PVR” ,location:”Tilak Nagar”} ]
+Ticketer.shows.findAndModify({
+	query: { _id: 45456 },
+	update: { $inc: { price: 50 } },
+	upsert: true
+           })
+Ticketer..movies.aggregate( [
+   { $count: M_colllection  }
+])
+Ticketer.theatres.save( 
+{ _id: 100, 
+name: "Fun Cinema", 
+t_collection: 3,00,500 } )
+Ticketer.movies.findOne(
+   { name: 'Shutter Island’' },
+   { _id: 023442, 
+ Director : "Christopher Nolan"})
+Ticketer.theatres.distinct( “locations”)
+Ticketer.theatres.update(
+   { _id: 12435878 },
+   {$inc: { t_collection: 10555 },
+    $set: { name: "PVR" , location:”Rohini” }})
+Ticketer.tickets.remove( 
+{ _id : 23456789} )
+Ticketer.tickets.findOneAndDelete(
+   { "movie_id" : 23098865,
+   Date: 20-05-2020 })
+Ticketer.shows.drop()
+
+
+Relational Algebraic Queries:
+
+movieName(releaseDate = "30-04-2020"  directorName = "Josh Boone" (Movies) ) 
+tickeId ( date >= "30-04-2020" (tickets) ) 
+movieName = "P.S. I Love You " (Movies)
+userReview( movieName = " Knives Out " (Movies))
+movieName , directorName ( theatreName = " PVR "(Shows) ) - 
+ movieName , directorName ( theatreName = " Fun Cinema "(Shows) ) 
+-id , name , accountType ( Users )
+theatreCollection > 3,00,000 (Theatres)
+Theatre.-id = Tickets.theatreId ( Theatres  Tickets ) 
+name , date ( Shows  Movies)
+movieCollection >= 10,000 movieCollection < 1,20,000  (Movies)
+name, location ( Cinemas )
+movie-collection ( movie-name  = "Knives Out" (Movies) )
+
+
+Work Distribution:
+
+Himanshu Bansal (2017236): Planning and Coding/Debugging (Movie booking part) and E-R
+Aayush (2017214): Planning and Coding/Debugging (Feedback ) and Relational algebra
+Shubhi (2017195): Planning and Coding/Debugging (Admin part) and Relational algebra
+Aditya Gupta (2017325): Planning and data entry and E-R and debugging
+Priyank (2017177): Data entry
+
+Future scope: (for bonus 10%)
+GUI (Done)
+Feedback (Done)
+Coupons/Offers
+Store Movie Poster as BLOB (Done)
+Movie recommendation using ML
+ADs
+Search feature wrt actors
+Food Item Booking for movies
+Car Parking at Theatres
+
+
+Assumption:
+The user is shown movies only till Friday to Friday
+Cinema can only extend the “till date” of a movie and not cut it down. 
+
+Related Links: 
+
+http://www.databaseanswers.org/data_models/cinema_bookings/index.htm
+https://itsourcecode.com/free-projects/database-design/movie-ticketing-system-database-design/
+
+
